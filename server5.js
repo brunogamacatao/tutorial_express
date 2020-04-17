@@ -20,10 +20,8 @@ app.post('/upload_foto', (req, res) => {
   var busboy = new Busboy({ headers: req.headers });
 
   busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
-    if (fieldname === 'foto') {
-      var saveTo = path.join(__dirname, 'uploads/' + filename);
-      file.pipe(fs.createWriteStream(saveTo));
-    }
+    var saveTo = path.join(__dirname, 'uploads/' + filename);
+    file.pipe(fs.createWriteStream(saveTo));
   });
 
   busboy.on('finish', () => {
